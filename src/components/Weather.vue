@@ -1,10 +1,8 @@
 <template>
   <div class="weather">
-    <h1>weather page compoment</h1>
-    <p>with child compoment:{{childComponents1}}</p>
-    <p>with child compoment:{{childComponents2}}</p>
+    <h1>weather lookup</h1>
     <p>{{weather_data}}</p>
-    <p>current time:</p>
+    <p>current time:todo</p>
     <temp-chart
       v-bind:tempVar0="tempCurr"
       v-bind:tempVar1="tempMax"
@@ -29,16 +27,22 @@ export default {
     return{
       childComponents1: 'TempVarChart',
       childComponents2: 'HighLights',
-      tempCurr: this.weather_data.temp,
-      tempMax: this.weather_data.todayTempHigh,
-      tempMin: this.weather_data.todayTempLow
+      
     }
   },
   methods:{
 
   },
   computed:{
-
+    tempCurr(){
+      return this.weather_data.temp
+    },
+    tempMax(){
+      return this.weather_data.todayHighLow.todayTempHigh
+    },
+    tempMin(){
+      return this.weather_data.todayHighLow.todayTempLow
+    }
   }
 }
 </script>

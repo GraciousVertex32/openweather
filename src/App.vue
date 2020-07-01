@@ -66,7 +66,7 @@ export default {
 
     unixToHuman(timezone,timestamp){
       var t = new Date(timestamp);
-      var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss")
+      var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
       return {
         time:formatted
       };
@@ -117,7 +117,7 @@ export default {
       axios.get(this.urlLink)
         .then((response) => {
           this.rawWeatherData = response.data;
-          console.log("getting data")
+          console.log("getting data");
           this.sortData();
         })
       .catch((error) =>{
