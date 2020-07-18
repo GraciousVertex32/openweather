@@ -2,18 +2,17 @@
   <div class="weather">
     <h1>weather lookup</h1>
     <p>{{weather_data}}</p>
-    <p>current time:todo</p>
+    <h3>current time:</h3>
+    <p>{{weather_data.time}}</p>
     <temp-chart
       v-bind:tempVar0="tempCurr"
       v-bind:tempVar1="tempMax"
       v-bind:tempVar2="tempMin"
     ></temp-chart>
-    <p><today-highlights v-bind:highlights="highlights"></today-highlights></p>
+    <today-highlights v-bind:highlights="wDate"></today-highlights>
   </div>
 </template>
-
 <script>
-
 import HighLights from "./HighLights";
 import TempVarChart from "./TempVarChart";
 export default {
@@ -27,7 +26,7 @@ export default {
     return{
       childComponents1: 'TempVarChart',
       childComponents2: 'HighLights',
-      
+      wDate: this.weather_data
     }
   },
   methods:{
@@ -35,13 +34,22 @@ export default {
   },
   computed:{
     tempCurr(){
+      console.log("updated temp")
       return this.weather_data.temp
     },
     tempMax(){
-      return this.weather_data.todayHighLow.todayTempHigh
+      return this.weather_data.todayTempHigh
     },
     tempMin(){
-      return this.weather_data.todayHighLow.todayTempLow
+      return this.weather_data.todayTempLow
+    },
+    forTest(){
+      console.log("updated test")
+      return this.weather_data.humidity
+    },
+    highlights(){
+      console.log("updated highligts")
+      return this.weather_data
     }
   }
 }

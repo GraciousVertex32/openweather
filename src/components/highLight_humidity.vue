@@ -1,17 +1,17 @@
 <template>
-  <div id="visibility">
-    <h3>Visibility:</h3>
-    {{visInfo}}
+  <div id="uv">
+    <b>humidity:</b>
+    {{humidityInfo}}
   </div>
 </template>
 
 <script>
 export default {
-  name: "visibility",
-  props:['highlights'],
+  name: "humidity",
+  props:['humidityInfo'],
   data(){
     return{
-      visInfo: this.currentWeather.visibility
+
     }
   },
   methods:{

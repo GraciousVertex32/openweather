@@ -4,13 +4,14 @@
       <input
         id="location-input"
         type="text"
-        placeholder="Location?"
-        @keyup.enter="completeWeatherApi()"
+        placeholder="Shanghai"
+        @keyup.enter="allgo()"
       >
       <button id="search-btn" name="search" @click="allgo()">search
       </button>
     </div>
-    <Weather v-bind:weather_data=currentWeather></Weather>
+    <transition name="fade"><Weather v-bind:weather_data=currentWeather></Weather></transition>
+
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
   name: 'App',
   components:{
     'Weather':weather
-},
+  },
   data(){
     return{
       filename: 'App.vue',
@@ -31,19 +32,18 @@ export default {
         //---------
         inputLocation:'',
         currentWeather: {
+          pressure: '',
           full_location: '', // for full address
           formatted_lat: '', // for N/S
           formatted_long: '', // for E/W
           time: '',
           temp: '',
-          todayHighLow: {
-            todayTempHigh: '',
-            todayTempHighTime: '',
-            todayTempLow: '',
-            todayTempLowTime: ''
-          },
-          summary: '',
-          possibility: ''
+          todayTempHigh: '',
+          todayTempLow: '',
+          type: '',
+          possibility: '',
+          humidity:'',
+          visibility:''
         },
         tempVar: {
           tempToday: [
@@ -65,15 +65,14 @@ export default {
   methods:{
 
     unixToHuman(timezone,timestamp){
-      var t = new Date(timestamp);
+      var t = new Date(timestamp*1000);
+      console.log(t);
       var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
-      return {
-        time:formatted
-      };
+      return t;
     },
     kTCelsius(tmp){
       var tInC = tmp - 273;
-      return{temp:tInC};
+      return tInC;
     },
     getTimezone() {
       return this.rawWeatherData.timezone;
@@ -84,26 +83,34 @@ export default {
       this.currentWeather.time = this.unixToHuman(
         timezone,
         currentTime
-      ).time ;
+      );
     },
     getSetTemperature(){
       var cur = this.rawWeatherData.main.temp;
       var curMin = this.rawWeatherData.main.temp_min;
       var curMax = this.rawWeatherData.main.temp_max;
-      this.currentWeather.temp =cur;
-      this.currentWeather.todayHighLow.todayTempHigh =curMax;
-      this.currentWeather.todayHighLow.todayTempLow =curMin;
+      this.currentWeather.temp = Math.round(this.kTCelsius(cur));
+      this.currentWeather.todayTempHigh = Math.round(this.kTCelsius(curMax));
+      this.currentWeather.todayTempLow = Math.round(this.kTCelsius(curMin));
     },
     getSetVisibility() {
       var visibilityInMiles = this.rawWeatherData.visibility;
       this.currentWeather.visibility = visibilityInMiles;
     },
+    getSetHumidity() {
+      var hum = this.rawWeatherData.main.humidity;
+      this.currentWeather.humidity = hum;
+    },
+    getSetWeatherType() {
+      var type = this.rawWeatherData.weather[0].description;
+      this.currentWeather.type = type;
+    },
     sortData(){
-      console.log("sorting data");
       this.getSetCurrentTime();
       this.getSetTemperature();
       this.getSetVisibility();
-      console.log("sorting complete");
+      this.getSetHumidity();
+      this.getSetWeatherType();
     },
     completeWeatherApi(){
       var prefix = 'http://api.openweathermap.org/data/2.5/weather';
@@ -117,7 +124,6 @@ export default {
       axios.get(this.urlLink)
         .then((response) => {
           this.rawWeatherData = response.data;
-          console.log("getting data");
           this.sortData();
         })
       .catch((error) =>{

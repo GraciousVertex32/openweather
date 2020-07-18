@@ -1,17 +1,16 @@
 <template>
-  <div id="uv">
-    <h3>UV information:</h3>
-    {{UVinfo}}
+  <div id="visibility">
+    <b>Visibility:</b>
+    {{visInfo}}
   </div>
 </template>
 
 <script>
 export default {
-  name: "UVindex",
-  props:['UVinfo'],
+  name: "visibility",
+  props:['visInfo'],
   data(){
     return{
-
     }
   },
   methods:{
