@@ -1,6 +1,6 @@
 <template>
   <div class="weather">
-    <p>{{weather_data}}</p>
+    <!--<p>{{weather_data}}</p>-->
     <h3>fetch time:</h3>
     <p>{{weather_data.time}}</p>
     <temp-chart v-bind:tempInfo="tempInfo"></temp-chart>

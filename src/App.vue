@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <h3>count:{{this.$store.state.count}}</h3>
-    <button @click="countIncrease">click to increase</button>
+    <!--<h3>count:{{this.$store.state.count}}</h3>
+    <button @click="countIncrease">click to increase</button>-->
     <el-container class="is-vertical">
-
       <el-header>
-        <Title-panel></Title-panel>
-      </el-header>
+        <el-container>
+          <Title-panel></Title-panel>
+          <el-container class="toppart">
+            <SearchBar @search="allgo" id="SearchBar"></SearchBar>
+          </el-container>
+        </el-container>
 
-      <SearchBar @search="allgo"></SearchBar>
+      </el-header>
 
       <el-container>
         <el-aside>
@@ -70,11 +73,11 @@ export default {
           todayTempHigh: '',
           todayTempLow: '',
         },
-        type: '',
         possibility: '',
         highlights: {
           humidity:'',
           visibility:'',
+          type: '',
           windStatus: {
             windSpeed: '',
             windDirection: ''
@@ -124,7 +127,7 @@ export default {
     },
     getSetWeatherType() {
       let type = this.rawWeatherData.weather[0].description;
-      this.currentWeather.type = type;
+      this.currentWeather.highlights.type = type;
     },
     sortData(){
       this.getSetCurrentTime();
@@ -172,5 +175,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 10px;
+}
+#SearchBar{
+  align-self: center;
+  float: right;
+}
+.toppart{
+  justify-content: flex-end;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <h1>weather lookup</h1>
+  <div>
+    <h1>weather lookup</h1>
+  </div>
+
 </template>
 
 <script>

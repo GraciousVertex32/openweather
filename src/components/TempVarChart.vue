@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "TempVarChart",
-  props:['tempInfo'],
+  //props:['tempInfo'],
   data(){
     return{
 
@@ -28,6 +28,9 @@ export default {
     },
     tempVar2(){
       return this.tempInfo.todayTempLow;
+    },
+    tempInfo(){
+      return this.$store.state.currentWeather.tempInfo;
     }
   }
 }
