@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "TempVarChart",
-  props:['tempVar0','tempVar1','tempVar2'],
+  props:['tempInfo'],
   data(){
     return{
 
@@ -20,7 +20,15 @@ export default {
 
   },
   computed:{
-
+    tempVar0(){
+      return this.tempInfo.temp;
+    },
+    tempVar1(){
+      return this.tempInfo.todayTempHigh;
+    },
+    tempVar2(){
+      return this.tempInfo.todayTempLow;
+    }
   }
 }
 </script>

@@ -1,14 +1,9 @@
 <template>
   <div class="weather">
-    <h1>weather lookup</h1>
     <p>{{weather_data}}</p>
-    <h3>current time:</h3>
+    <h3>fetch time:</h3>
     <p>{{weather_data.time}}</p>
-    <temp-chart
-      v-bind:tempVar0="tempCurr"
-      v-bind:tempVar1="tempMax"
-      v-bind:tempVar2="tempMin"
-    ></temp-chart>
+    <temp-chart v-bind:tempInfo="tempInfo"></temp-chart>
     <today-highlights v-bind:highlights="wDate"></today-highlights>
   </div>
 </template>
@@ -24,9 +19,7 @@ export default {
   props: ["weather_data"],
   data(){
     return{
-      childComponents1: 'TempVarChart',
-      childComponents2: 'HighLights',
-      wDate: this.weather_data
+      wDate: this.weather_data,
     }
   },
   methods:{
@@ -34,29 +27,30 @@ export default {
   },
   computed:{
     tempCurr(){
-      console.log("updated temp")
-      return this.weather_data.temp
+      console.log("updated temp");
+      return this.weather_data.temp;
     },
     tempMax(){
-      return this.weather_data.todayTempHigh
+      return this.weather_data.todayTempHigh;
     },
     tempMin(){
-      return this.weather_data.todayTempLow
+      return this.weather_data.todayTempLow;
     },
     forTest(){
-      console.log("updated test")
-      return this.weather_data.humidity
+      console.log("updated test");
+      return this.weather_data.humidity;
     },
     highlights(){
       console.log("updated highligts")
-      return this.weather_data
+      return this.weather_data.highlights;
+    },
+    tempInfo(){
+      return  this.weather_data.tempInfo;
     }
   }
 }
 </script>
 
 <style scoped>
-h1 {
-  color: #42b983;
-}
+
 </style>

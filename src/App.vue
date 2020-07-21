@@ -1,16 +1,34 @@
 <template>
   <div id="app">
-    <div id="search">
-      <input
-        id="location-input"
-        type="text"
-        placeholder="Shanghai"
-        @keyup.enter="allgo()"
-      >
-      <button id="search-btn" name="search" @click="allgo()">search
-      </button>
-    </div>
-    <transition name="fade"><Weather v-bind:weather_data=currentWeather></Weather></transition>
+    <h3>count:{{this.$store.state.count}}</h3>
+    <button @click="countIncrease">click to increase</button>
+    <el-container class="is-vertical">
+
+      <el-header>
+        <Title-panel></Title-panel>
+      </el-header>
+
+      <SearchBar @search="allgo"></SearchBar>
+
+      <el-container>
+        <el-aside>
+          <Sidebar></Sidebar>
+        </el-aside>
+
+        <router-view></router-view>
+
+        <el-main>
+          <transition name="fade">
+            <Weather v-bind:weather_data=currentWeather></Weather>
+          </transition>
+        </el-main>
+      </el-container>
+
+
+      <el-footer>
+        <Footer></Footer>
+      </el-footer>
+    </el-container>
 
   </div>
 </template>
@@ -19,10 +37,20 @@
 import moment from 'moment';
 import axios from 'axios';
 import weather from './components/Weather';
+import Banner from "./components/Banner";
+import Footer from "./components/Footer";
+import Sidebar from "./components/Sidebar";
+import SearchBar from "./components/SearchBar";
+
+
 export default {
   name: 'App',
   components:{
-    'Weather':weather
+    SearchBar,
+    Sidebar,
+    'Footer': Footer,
+    'Weather': weather,
+    'Title-panel': Banner
   },
   data(){
     return{
@@ -30,79 +58,72 @@ export default {
       rawWeatherData:'',
       urlLink:'',
         //---------
-        inputLocation:'',
-        currentWeather: {
-          pressure: '',
-          full_location: '', // for full address
-          formatted_lat: '', // for N/S
-          formatted_long: '', // for E/W
-          time: '',
+      inputLocation:'',
+      currentWeather: {
+        pressure: '',
+        full_location: '', // for full address
+        formatted_lat: '', // for N/S
+        formatted_long: '', // for E/W
+        time: '',
+        tempInfo:{
           temp: '',
           todayTempHigh: '',
           todayTempLow: '',
-          type: '',
-          possibility: '',
-          humidity:'',
-          visibility:''
         },
-        tempVar: {
-          tempToday: [
-            // gets added dynamically by this.getSetHourlyTempInfoToday()
-          ],
-        },
+        type: '',
+        possibility: '',
         highlights: {
-          uvIndex: '',
-          visibility: '',
+          humidity:'',
+          visibility:'',
           windStatus: {
             windSpeed: '',
-            windDirection: '',
-            derivedWindDirection: ''
+            windDirection: ''
           },
         }
-
+      }
     }
   },
   methods:{
 
     unixToHuman(timezone,timestamp){
-      var t = new Date(timestamp*1000);
-      console.log(t);
-      var formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
+      let t = new Date(timestamp*1000);
+      let formatted = moment(t).format("dd.mm.yyyy hh:MM:ss");
       return t;
     },
     kTCelsius(tmp){
-      var tInC = tmp - 273;
+      let tInC = tmp - 273;
       return tInC;
     },
     getTimezone() {
       return this.rawWeatherData.timezone;
     },
     getSetCurrentTime() {
-      var currentTime = this.rawWeatherData.dt;
-      var timezone = this.getTimezone();
+      let currentTime = this.rawWeatherData.dt;
+      let timezone = this.getTimezone();
       this.currentWeather.time = this.unixToHuman(
         timezone,
         currentTime
       );
+      this.$store.state.currentWeather.time
     },
     getSetTemperature(){
-      var cur = this.rawWeatherData.main.temp;
-      var curMin = this.rawWeatherData.main.temp_min;
-      var curMax = this.rawWeatherData.main.temp_max;
-      this.currentWeather.temp = Math.round(this.kTCelsius(cur));
-      this.currentWeather.todayTempHigh = Math.round(this.kTCelsius(curMax));
-      this.currentWeather.todayTempLow = Math.round(this.kTCelsius(curMin));
+      let cur = this.rawWeatherData.main.temp;
+      let curMin = this.rawWeatherData.main.temp_min;
+      let curMax = this.rawWeatherData.main.temp_max;
+      this.currentWeather.tempInfo.temp = Math.round(this.kTCelsius(cur));
+      this.currentWeather.tempInfo.todayTempHigh = Math.round(this.kTCelsius(curMax));
+      this.currentWeather.tempInfo.todayTempLow = Math.round(this.kTCelsius(curMin));
     },
     getSetVisibility() {
-      var visibilityInMiles = this.rawWeatherData.visibility;
-      this.currentWeather.visibility = visibilityInMiles;
+      let visibilityInMiles = this.rawWeatherData.visibility;
+      this.currentWeather.highlights.visibility = visibilityInMiles;
     },
     getSetHumidity() {
-      var hum = this.rawWeatherData.main.humidity;
-      this.currentWeather.humidity = hum;
+      let hum = this.rawWeatherData.main.humidity;
+      this.currentWeather.highlights.humidity = hum;
     },
     getSetWeatherType() {
-      var type = this.rawWeatherData.weather[0].description;
+      let type = this.rawWeatherData.weather[0].description;
       this.currentWeather.type = type;
     },
     sortData(){
@@ -112,27 +133,33 @@ export default {
       this.getSetHumidity();
       this.getSetWeatherType();
     },
-    completeWeatherApi(){
-      var prefix = 'http://api.openweathermap.org/data/2.5/weather';
-      var apikey = '28da538f1a9e32b0cc49cbf3a223510d';
-      var city = document.getElementById('location-input').value;
+    completeWeatherApi(location){
+      let prefix = 'http://api.openweathermap.org/data/2.5/weather';
+      let apikey = '28da538f1a9e32b0cc49cbf3a223510d';
       //change?
-      this.urlLink = prefix + '?q=' + city + '&appid=' + apikey;
+      this.urlLink = prefix + '?q=' + location + '&appid=' + apikey;
     },
-    fetchData(){
-      this.completeWeatherApi();
+    fetchData(location){
+      this.completeWeatherApi(location);
       axios.get(this.urlLink)
         .then((response) => {
           this.rawWeatherData = response.data;
           this.sortData();
+          this.populateDateToStore();
         })
       .catch((error) =>{
         console.log(error);
       })
     },
-    allgo(){
-      this.fetchData();
+    allgo(location){
+      this.fetchData(location);
     },
+    countIncrease(){
+      this.$store.commit("countIncrease");
+    },
+    populateDateToStore(){
+      this.$store.commit("populate",this.currentWeather);
+    }
   }
 }
 </script>
