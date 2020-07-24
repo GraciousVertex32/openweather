@@ -3,10 +3,18 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+
+import './assets/normalize.css'
+
 import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import moment from "moment";
+
+import echarts from 'echarts';
+Vue.prototype.$echarts = echarts
+
 import axios from 'axios';
+Vue.prototype.$axios = axios;
+
 import Vuex from'vuex';
 
 Vue.config.productionTip = false
@@ -15,6 +23,9 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state:{
     count: 0,
+    forecast:{
+      hourly:[],
+    },
     currentWeather: {
       pressure: '',
       full_location: '', // for full address
@@ -26,24 +37,27 @@ const store = new Vuex.Store({
         todayTempHigh: '',
         todayTempLow: '',
       },
-      type: '',
       possibility: '',
       highlights: {
         humidity:'',
         visibility:'',
+        type: '',
         windStatus: {
           windSpeed: '',
           windDirection: ''
         },
       }
-    }
+    },
   },
   mutations:{
     countIncrease(state){
       state.count++;
     },
-    populate(state,data){
+    populateDay(state,data){
       state.currentWeather = Object.assign(state.currentWeather,data);
+    },
+    populateWeek(state,data){
+      state.forecast = Object.assign(state.forecast,data);
     }
   },
 

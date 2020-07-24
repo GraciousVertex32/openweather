@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Weather from "../components/Weather";
 import TempVarChart from "../components/TempVarChart";
 import HighLights from "../components/HighLights";
+import SimpleDay from "../components/SimpleDay";
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/HighLight',
       name: 'HighLight',
       component: HighLights,
+    },
+    {
+      path: '/day/:id',
+      name: 'day',
+      component: SimpleDay,
     }
   ]
 })
