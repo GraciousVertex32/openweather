@@ -4,6 +4,7 @@
     <visibility-panel v-bind:visInfo="visInfo"></visibility-panel>
     <humidity-panel v-bind:humidityInfo="humInfo"></humidity-panel>
     <type-panel v-bind:type="typeInfo"></type-panel>
+    <img :src="imgLink">
   </div>
 </template>
 
@@ -40,6 +41,12 @@ export default {
     /*highlights(){
       return  this.$store.state.currentWeather.highlights;
     }*/
+    imgLink(){
+      let base = 'http://openweathermap.org/img/wn/';
+      let end = '@2x.png';
+      let url = base + this.highlights.icon + end;
+      return url
+    }
   }
 }
 </script>

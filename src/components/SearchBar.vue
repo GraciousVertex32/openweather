@@ -1,13 +1,15 @@
 <template>
   <div id="searchbar">
-    <input
+    <el-input
       id="location-input"
       type="text"
       placeholder="Shanghai"
       @keyup.enter="apiRequest(location)"
       v-model="location"
-    >
-    <button id="search-btn" name="search" @click="apiRequest(location)">search</button>
+    ></el-input>
+    <div id="btn">
+      <el-button id="search-btn" name="search" @click="apiRequest(location)">search</el-button>
+    </div>
   </div>
 </template>
 
@@ -28,5 +30,14 @@ export default {
 </script>
 
 <style scoped>
+#search-btn{
+  type: primary;
+}
 
+#btn{
+  float: right;
+}
+#searchbar{
+
+}
 </style>

@@ -7,7 +7,7 @@ import router from './router';
 import './assets/normalize.css'
 
 import ElementUi from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import './assets/index.css';
 
 import echarts from 'echarts';
 Vue.prototype.$echarts = echarts

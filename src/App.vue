@@ -227,6 +227,9 @@ export default {
 #SearchBar{
   align-self: center;
   float: right;
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
 }
 .toppart{
   justify-content: flex-end;

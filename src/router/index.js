@@ -5,6 +5,7 @@ import Weather from "../components/Weather";
 import TempVarChart from "../components/TempVarChart";
 import HighLights from "../components/HighLights";
 import SimpleDay from "../components/SimpleDay";
+import ChartParent from "../components/ChartParent";
 
 Vue.use(Router)
 
@@ -23,7 +24,7 @@ export default new Router({
     {
       path: '/temperature',
       name: 'Temperature',
-      component: TempVarChart,
+      component: ChartParent,
       props: true
     },
     {

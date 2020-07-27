@@ -2,6 +2,7 @@
 <div id="test">
   <b>weather type:</b>
   {{type}}
+
 </div>
 </template>
 

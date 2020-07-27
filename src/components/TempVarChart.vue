@@ -13,10 +13,10 @@ import Vue from 'vue';
 import utils from "../utils/utils";
 export default {
   name: "TempVarChart",
-  //props:['tempInfo'],
+  props:['tempInfo'],
   data(){
     return{
-      raw: [],
+      raw: {},
     }
   },
   methods:{
@@ -49,46 +49,27 @@ export default {
     }
   },
   mounted() {
-    this.raw = this.$store.state.forecast.hourly
-    console.log(this.rawProcessed.length);
-    console.log(this.rawProcessed[0]);
-    console.log(this.rawProcessed[1]);
-    //this.buildTempArray();
+    this.raw = this.tempInfo
     this.drawChart();
   },
   beforeUpdate() {
     this.raw = this.$store.state.forecast.hourly
-    console.log(this.rawProcessed.length);
-    console.log(this.rawProcessed[0]);
-    console.log(this.rawProcessed[1]);
-    //this.buildTempArray();
     this.drawChart();
   },
   computed:{
     tempVar0(){
-      return this.tempInfo.temp;
+      return this.tempInfo.tempInfo.temp;
     },
     tempVar1(){
-      return this.tempInfo.todayTempHigh;
+      return this.tempInfo.tempInfo.todayTempHigh;
     },
     tempVar2(){
-      return this.tempInfo.todayTempLow;
-    },
-    tempInfo(){
-      return this.$store.state.currentWeather.tempInfo;
-    },
-    hourlyTempArray(){
-      let hourlyInfo = [];
-      let raw = this.$store.state.forecast.hourly;
-      for(var i = 0; i < raw.length; i++) {
-        hourlyInfo[i] = raw[i].temp;
-      }
-      return hourlyInfo
+      return this.tempInfo.tempInfo.todayTempLow;
     },
     rawProcessed(){
       let hourlyInfo = [];
-      for(var i = 0; i < this.raw.length; i++) {
-        hourlyInfo[i] = this.raw[i].temp;
+      for(var i = 0; i < this.raw.hourly.length; i++) {
+        hourlyInfo[i] = this.raw.hourly[i].temp;
       }
       return hourlyInfo
     },
