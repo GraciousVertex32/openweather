@@ -17,12 +17,13 @@
           <Sidebar></Sidebar>
         </el-aside>
 
-        <router-view></router-view>
+
 
         <el-main>
-          <transition name="fade">
+          <router-view></router-view>
+          <!--<transition name="fade">
             <Weather v-bind:weather_data=currentWeather></Weather>
-          </transition>
+          </transition>-->
         </el-main>
       </el-container>
 

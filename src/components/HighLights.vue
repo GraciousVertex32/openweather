@@ -18,7 +18,7 @@ export default {
     'visibility-panel':visibility,
     'type-panel':type
   },
-  //props:['highlights'],
+  props:['highlights'],
   data(){
     return{
     }
@@ -37,9 +37,9 @@ export default {
     typeInfo(){
       return this.highlights.type
     },
-    highlights(){
+    /*highlights(){
       return  this.$store.state.currentWeather.highlights;
-    }
+    }*/
   }
 }
 </script>

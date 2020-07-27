@@ -25,6 +25,7 @@ const store = new Vuex.Store({
     count: 0,
     forecast:{
       hourly:[],
+      daily:[],
     },
     currentWeather: {
       pressure: '',

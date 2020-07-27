@@ -13,6 +13,16 @@ var utils = {
     var days = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'];
     var dayOfWeek = days[xx.getDay()]
     return dayOfWeek;
+  },
+  getDayOfWeek(){
+    var t = new Date();
+    var today = t.getDay();
+    return today;
+  },
+  getHourOfDay(){
+    var t = new Date();
+    var today = t.getHours();
+    return today;
   }
 }
 export default utils;

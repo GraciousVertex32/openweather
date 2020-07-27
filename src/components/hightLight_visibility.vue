@@ -1,6 +1,6 @@
 <template>
   <div id="visibility">
-    <b>Visibility:</b>
+    <b>UV index:</b>
     {{visInfo}}
   </div>
 </template>

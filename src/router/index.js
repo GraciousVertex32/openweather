@@ -30,11 +30,13 @@ export default new Router({
       path: '/HighLight',
       name: 'HighLight',
       component: HighLights,
+      props: true
     },
     {
       path: '/day/:id',
       name: 'day',
       component: SimpleDay,
+      props: true
     }
   ]
 })

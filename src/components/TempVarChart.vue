@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import utils from "../utils/utils";
 export default {
   name: "TempVarChart",
   //props:['tempInfo'],
@@ -32,7 +34,7 @@ export default {
           data:['小时']
         },
         xAxis: {
-          data: ["1","2","3","4","5","6",'7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24']
+          data: this.hourArray
         },
         yAxis: {},
         series: [{
@@ -90,7 +92,13 @@ export default {
       }
       return hourlyInfo
     },
-
+    hourArray(){
+      var hours = [];
+      for (let i = 0; i <24; i++) {
+        Vue.set(hours, i, utils.getHourOfDay() + i < 24? utils.getHourOfDay() + i : utils.getHourOfDay() + i - 24 )
+      }
+      return hours
+    }
   }
 }
 </script>
