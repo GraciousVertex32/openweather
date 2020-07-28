@@ -4,7 +4,7 @@
       <el-col>
         <h5>导航</h5>
         <el-menu router="true">
-          <el-submenu index="1">
+          <el-submenu index="1" v-bind:disabled="disable">
 
             <template slot="title">
               <i class="el-icon-menu"></i>
@@ -15,7 +15,7 @@
             <el-menu-item index="/temperature">温度</el-menu-item>
 
           </el-submenu>
-          <el-submenu index="2">
+          <el-submenu index="2" v-bind:disabled="disable">
             <!--add disable status-->
             <template slot="title">
               <i class="el-icon-menu"></i>
@@ -51,6 +51,7 @@ import Vue from 'vue';
 import utils from "../utils/utils";
 export default {
   name: "sidebar",
+  props: ["hasData"],
   data(){
     return{
       days : ['星期天','星期一','星期二','星期三','星期四','星期五','星期六'],
@@ -58,6 +59,9 @@ export default {
     }
   },
   computed:{
+    disable(){
+      return !this.hasData
+    },
     week(){
       var week = [];
       var curr = utils.getDayOfWeek();

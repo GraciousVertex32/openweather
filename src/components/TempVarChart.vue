@@ -38,7 +38,7 @@ export default {
           data: this.hourArray
         },
         yAxis: {
-          min:'20',
+          //min:'20',
           splitNumber:'10'
         },
         series: [{

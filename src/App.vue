@@ -12,7 +12,7 @@
       </el-header>
 
       <el-container>
-        <el-aside><Sidebar></Sidebar></el-aside>
+        <el-aside><Sidebar v-bind:hasData="this.hasData"></Sidebar></el-aside>
 
         <el-main>
           <transition name="fade" mode="out-in">
@@ -62,7 +62,7 @@ export default {
       inputLocation:'',
       lat:'',
       lon:'',
-
+      hasData: false,
       currentWeather: {
         pressure: '',
         full_location: '', // for full address
@@ -197,6 +197,7 @@ export default {
     fetchData(location){
       this.fetchToday(location);
       this.fetchWeek(location);
+      this.hasData = true;
     },
     allgo(location){
       this.fetchData(location);
