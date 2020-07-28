@@ -17,7 +17,6 @@
         <el-main>
           <transition name="fade" mode="out-in">
             <router-view :key="$route.params.id"></router-view>
-            <!--<Weather v-bind:weather_data=currentWeather></Weather>-->
           </transition>
         </el-main>
 
@@ -133,10 +132,11 @@ export default {
 
 
     //build api link
-    completeWeatherApi(location){
+    completeWeatherApi(lon,lat){
       let prefix = 'http://api.openweathermap.org/data/2.5/weather';
       let apikey = '28da538f1a9e32b0cc49cbf3a223510d';
-      this.dayUrlLink = prefix + '?q=' + location + '&appid=' + apikey;
+      this.dayUrlLink = prefix + '?lat=' + lat + '&lon=' + lon + '&appid=' + apikey;
+      console.log(this.dayUrlLink);
     },
     weekForecastApi(lon,lat){
       let prefix = 'https://api.openweathermap.org/data/2.5/onecall';
@@ -155,17 +155,28 @@ export default {
 
     //requests
     fetchToday(location){
-      this.completeWeatherApi(location);
+      this.locationToCoordinates(location)
+      this.completeWeatherApi();
       //today's weather
-      axios.get(this.dayUrlLink)
-        .then((response) => {
-          this.rawWeatherData = response.data;
-          this.sortDayData();
-          this.populateDayDateToStore();
-        })
-        .catch((error) =>{
-          console.log(error);
-        });
+      axios.get(this.searchUrlLink)
+      .then((response) =>{
+        this.lat = response.data[0].lat;
+        this.lon = response.data[0].lon;
+        this.completeWeatherApi(this.lon,this.lat);
+        axios.get(this.dayUrlLink)
+          .then((response) => {
+            this.rawWeatherData = response.data;
+            this.sortDayData();
+            this.populateDayDateToStore();
+          })
+          .catch((error) =>{
+            console.log(error);
+          });}
+      )
+      .catch();
+
+
+
     },
     fetchWeek(location){
       this.locationToCoordinates(location)

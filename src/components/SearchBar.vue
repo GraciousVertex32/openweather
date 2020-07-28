@@ -4,7 +4,7 @@
       id="location-input"
       type="text"
       placeholder="Shanghai"
-      @keyup.enter="apiRequest(location)"
+      @keyup.native.enter="apiRequest(location)"
       v-model="location"
     ></el-input>
     <div id="btn">

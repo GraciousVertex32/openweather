@@ -3,7 +3,7 @@
     <el-row class="tac">
       <el-col>
         <h5>导航</h5>
-        <el-menu router="true">
+        <el-menu router>
           <el-submenu index="1" v-bind:disabled="disable">
 
             <template slot="title">
