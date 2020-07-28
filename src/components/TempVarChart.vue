@@ -1,9 +1,9 @@
 <template>
 <div id="tempvarchart">
-  <h3>temperature:</h3>
-  current temperature:{{tempVar0}}<br>
-  today's highest:{{tempVar1}}<br>
-  today's  lowest:{{tempVar2}}
+  <h3>温度:</h3>
+  当前温度:{{tempVar0}}<br>
+  今天最高:{{tempVar1}}<br>
+  今日最低:{{tempVar2}}
   <div id="chart"></div>
 </div>
 </template>
@@ -34,10 +34,15 @@ export default {
           data:['小时']
         },
         xAxis: {
+          type: 'category',
           data: this.hourArray
         },
-        yAxis: {},
+        yAxis: {
+          min:'20',
+          splitNumber:'10'
+        },
         series: [{
+          smooth: true,
           name: '温度',
           type: 'line',
           data: this.rawProcessed,
@@ -53,7 +58,7 @@ export default {
     this.drawChart();
   },
   beforeUpdate() {
-    this.raw = this.$store.state.forecast.hourly
+    this.raw = this.tempInfo
     this.drawChart();
   },
   computed:{
@@ -75,8 +80,10 @@ export default {
     },
     hourArray(){
       var hours = [];
+      var d = new Date();
       for (let i = 0; i <24; i++) {
         Vue.set(hours, i, utils.getHourOfDay() + i < 24? utils.getHourOfDay() + i : utils.getHourOfDay() + i - 24 )
+        //Vue.set(hours, i, d.getTime()+i*3600 )
       }
       return hours
     }

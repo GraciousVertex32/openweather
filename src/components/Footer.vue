@@ -9,5 +9,7 @@ name: "footer"
 </script>
 
 <style scoped>
-
+p{
+  float: right;
+}
 </style>

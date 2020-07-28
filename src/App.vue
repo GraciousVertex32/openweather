@@ -3,30 +3,25 @@
     <!--<h3>count:{{this.$store.state.count}}</h3>
     <button @click="countIncrease">click to increase</button>-->
     <el-container class="is-vertical">
+
       <el-header>
         <el-container>
           <Title-panel></Title-panel>
-          <el-container class="toppart">
-            <SearchBar @search="allgo" id="SearchBar"></SearchBar>
-          </el-container>
+          <el-container class="toppart"><SearchBar @search="allgo" id="SearchBar"></SearchBar></el-container>
         </el-container>
       </el-header>
 
       <el-container>
-        <el-aside>
-          <Sidebar></Sidebar>
-        </el-aside>
-
-
+        <el-aside><Sidebar></Sidebar></el-aside>
 
         <el-main>
-          <router-view></router-view>
-          <!--<transition name="fade">
-            <Weather v-bind:weather_data=currentWeather></Weather>
-          </transition>-->
+          <transition name="fade" mode="out-in">
+            <router-view :key="$route.params.id"></router-view>
+            <!--<Weather v-bind:weather_data=currentWeather></Weather>-->
+          </transition>
         </el-main>
-      </el-container>
 
+      </el-container>
 
       <el-footer>
         <Footer></Footer>
@@ -236,5 +231,11 @@ export default {
 }
 .toppart{
   justify-content: flex-end;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

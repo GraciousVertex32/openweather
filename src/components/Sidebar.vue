@@ -11,8 +11,8 @@
               <span>今日天气</span>
             </template>
 
-            <el-menu-item index="/HighLight" >high light</el-menu-item>
-            <el-menu-item index="/temperature">temperature</el-menu-item>
+            <el-menu-item index="/HighLight" >天气</el-menu-item>
+            <el-menu-item index="/temperature">温度</el-menu-item>
 
           </el-submenu>
           <el-submenu index="2">

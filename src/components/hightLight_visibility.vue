@@ -1,6 +1,6 @@
 <template>
   <div id="visibility">
-    <b>UV index:</b>
+    <b>紫外线指数:</b>
     {{visInfo}}
   </div>
 </template>

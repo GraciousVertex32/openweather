@@ -1,6 +1,6 @@
 <template>
   <div id="highlights">
-    <h3>weather highlights:</h3>
+    <h3>天气情况:</h3>
     <visibility-panel v-bind:visInfo="visInfo"></visibility-panel>
     <humidity-panel v-bind:humidityInfo="humInfo"></humidity-panel>
     <type-panel v-bind:type="typeInfo"></type-panel>

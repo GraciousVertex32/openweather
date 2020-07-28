@@ -1,6 +1,6 @@
 <template>
   <div id="uv">
-    <b>humidity:</b>
+    <b>湿度:</b>
     {{humidityInfo}}
   </div>
 </template>

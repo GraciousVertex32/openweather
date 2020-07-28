@@ -1,6 +1,6 @@
 <template>
 <div id="test">
-  <b>weather type:</b>
+  <b>天气:</b>
   {{type}}
 
 </div>
