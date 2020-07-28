@@ -6,6 +6,7 @@ import TempVarChart from "../components/TempVarChart";
 import HighLights from "../components/HighLights";
 import SimpleDay from "../components/SimpleDay";
 import ChartParent from "../components/ChartParent";
+import HighLightParent from "../components/HighLightParent";
 
 Vue.use(Router)
 
@@ -25,13 +26,13 @@ export default new Router({
       path: '/temperature',
       name: 'Temperature',
       component: ChartParent,
-      props: true
+      //props: true
     },
     {
       path: '/HighLight',
       name: 'HighLight',
-      component: HighLights,
-      props: true
+      component: HighLightParent,
+      //props: true
     },
     {
       path: '/day/:id',

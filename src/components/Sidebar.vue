@@ -1,56 +1,43 @@
 <template>
   <div>
-    <ul>
-      <h4>Today's Weather</h4>
-      <ul>
-        <li><router-link to="{path:'/HighLight', params:}" >high light</router-link></li>
-        <li><router-link to="/temperature">temperature</router-link></li>
-        <li><p>other</p></li>
-      </ul>
-      <h4>7-day forecast</h4>
-      <ul>
-        <li><router-link to="/day/0">{{ days[week[0]] }}</router-link></li>
-        <li><router-link to="/day/1">{{ days[week[1]] }}</router-link></li>
-        <li><router-link to="/day/2">{{ days[week[2]] }}</router-link></li>
-        <li><router-link to="/day/3">{{ days[week[3]] }}</router-link></li>
-        <li><router-link to="/day/4">{{ days[week[4]] }}</router-link></li>
-        <li><router-link to="/day/5">{{ days[week[5]] }}</router-link></li>
-        <li><router-link to="/day/6">{{ days[week[6]] }}</router-link></li>
-      </ul>
-    </ul>
     <el-row class="tac">
       <el-col>
-        <h5>默认颜色</h5>
-        <el-menu>
+        <h5>导航</h5>
+        <el-menu router="true">
           <el-submenu index="1">
+
             <template slot="title">
               <i class="el-icon-menu"></i>
-              <span>导航一</span>
+              <span>今日天气</span>
             </template>
-            <el-menu-item-group title="分组一">
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group >
-            <el-submenu index="1-4" title="选项4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
+
+            <el-menu-item index="/HighLight" >high light</el-menu-item>
+            <el-menu-item index="/temperature">temperature</el-menu-item>
+
           </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
+          <el-submenu index="2">
+            <!--add disable status-->
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              <span>7日预报</span>
+            </template>
+            <!--title-->
+            <el-menu-item index="/day/0">{{ days[week[0]] }}</el-menu-item>
+
+            <el-menu-item index="/day/1">{{ days[week[1]] }}</el-menu-item>
+
+            <el-menu-item index="/day/2">{{ days[week[2]] }}</el-menu-item>
+
+            <el-menu-item index="/day/3">{{ days[week[3]] }}</el-menu-item>
+
+            <el-menu-item index="/day/4">{{ days[week[4]] }}</el-menu-item>
+
+            <el-menu-item index="/day/5">{{ days[week[5]] }}</el-menu-item>
+
+            <el-menu-item index="/day/6">{{ days[week[6]] }}</el-menu-item>
+
+          </el-submenu>
+
         </el-menu>
       </el-col>
     </el-row>
@@ -86,5 +73,9 @@ export default {
 <style scoped>
 li{
   list-style: none;
+}
+
+el-menu{
+
 }
 </style>

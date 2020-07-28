@@ -84,6 +84,7 @@ export default {
           humidity:'',
           visibility:'',
           type: '',
+          icon:'',
           windStatus: {
             windSpeed: '',
             windDirection: ''
@@ -124,6 +125,8 @@ export default {
     getSetWeatherType() {
       let type = this.rawWeatherData.weather[0].description;
       this.currentWeather.highlights.type = type;
+      let icon = this.rawWeatherData.weather[0].icon;
+      this.currentWeather.highlights.icon = icon;
     },
     sortDayData(){
       this.getSetCurrentTime();

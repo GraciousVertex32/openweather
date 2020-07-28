@@ -43,6 +43,7 @@ const store = new Vuex.Store({
         humidity:'',
         visibility:'',
         type: '',
+        icon:'',
         windStatus: {
           windSpeed: '',
           windDirection: ''

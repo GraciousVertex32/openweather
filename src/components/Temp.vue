@@ -31,7 +31,7 @@ export default {
       return this.tempInfo.day;
     },
     nightTemp(){
-      return this.tempInfo.night;
+      return this.tempInfo.eve;
     },
     highTemp(){
       return this.tempInfo.max;
