@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Weather from "../components/Weather";
-import TempVarChart from "../components/TempVarChart";
-import HighLights from "../components/HighLights";
 import SimpleDay from "../components/SimpleDay";
 import ChartParent from "../components/ChartParent";
 import HighLightParent from "../components/HighLightParent";
+import store from '../main'
+
 Vue.use(Router)
 
 let router = new Router({
@@ -47,10 +47,10 @@ let router = new Router({
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresData)){  // 判断该路由是否需数据
-    if (this.$store.state.currentWeather.time == ''){
+    if (store.state.currentWeather.time == ''){
       next({ name: 'Weather' });
-      console.log('hasData false');
-      console.log(from)
+      console.log('没有天气数据');
+      console.log(store.state)
     }else {next();}
   }else {next();}
 })
