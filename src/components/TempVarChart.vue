@@ -42,9 +42,10 @@ export default {
         legend: {
           data:['小时']
         },
+        color: ['#409EFF'],
         xAxis: {
           type: 'time',
-
+          splitNumber: 10,
           //type: 'category',
           splitLine: {
             show: false
