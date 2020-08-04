@@ -15,5 +15,6 @@ export default {
   #title{
     color: #42b983;
     margin-left: 5%;
+
   }
 </style>

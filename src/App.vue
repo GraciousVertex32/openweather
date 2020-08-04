@@ -232,7 +232,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 10px;
   background-color: #f8f8f8;
 }
 #SearchBar{
@@ -250,5 +249,12 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.el-header{
+  background-color: #ecf5ff;
+  padding-top: 10px;
+  height: 70px ! important
+}
+.el-aside{
 }
 </style>

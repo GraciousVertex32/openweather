@@ -3,7 +3,7 @@
     <el-row class="tac">
       <el-col>
         <el-menu router>
-          <h5>导航</h5>
+          <h5 style="padding-top: 0.5rem">导航</h5>
           <el-submenu index="1" v-bind:disabled="disable">
 
             <template slot="title">
@@ -84,6 +84,5 @@ el-menu{
 }
 #sidebar{
   margin-right: 20px;
-
 }
 </style>

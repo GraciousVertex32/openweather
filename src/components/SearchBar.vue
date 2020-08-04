@@ -32,6 +32,7 @@ export default {
 <style scoped>
 #search-btn{
   type: primary;
+  margin-left: 10px;
 }
 
 #btn{

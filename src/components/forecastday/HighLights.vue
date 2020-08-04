@@ -30,7 +30,7 @@ export default {
   computed:{
     visInfo(){
       console.log("updated visInfo");
-      return this.highlights.visibility
+      return this.highlights.uvi
     },
     humInfo(){
       return this.highlights.humidity
@@ -51,5 +51,9 @@ export default {
 }
 </script>
 <style scoped>
-
+#highlights{
+  margin: 10px;
+  padding: 50px;
+  background-color: white;
+}
 </style>

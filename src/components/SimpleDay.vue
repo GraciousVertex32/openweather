@@ -13,7 +13,7 @@
 
 <script>
 import TempVarChart from "./TempVarChart";
-import DayNightTemp from "./Temp";
+import DayNightTemp from "./forecastday/Temp";
 import HighLights from "./forecastday/HighLights";
 import utils from "../utils/utils";
 import Uv_chart from "./forecastday/uv_chart";
