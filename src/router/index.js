@@ -4,7 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Weather from "../components/Weather";
 import SimpleDay from "../components/SimpleDay";
 import ChartParent from "../components/ChartParent";
-import HighLightParent from "../components/HighLightParent";
+import HighLightParent from "../components/forecastday/HighLightParent";
 import store from '../main'
 
 Vue.use(Router)

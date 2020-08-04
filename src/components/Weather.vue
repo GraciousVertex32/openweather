@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import HighLights from "./HighLights";
+import HighLights from "./forecastday/HighLights";
 import TempVarChart from "./TempVarChart";
 export default {
   name: "Weather",

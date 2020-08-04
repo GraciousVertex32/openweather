@@ -1,10 +1,14 @@
 <template>
 <div id="tempvarchart">
   <h3>温度:</h3>
-  当前温度:{{tempVar0}}<br>
-  今天最高:{{tempVar1}}<br>
-  今日最低:{{tempVar2}}
   <div id="chart"></div>
+  <div id="cmm" class="box ">
+    <p>当前温度:{{tempVar0}}</p>
+    <p>今天最高:{{tempVar1}}</p>
+    <p>今日最低:{{tempVar2}}</p>
+  </div>
+  <br>
+
 </div>
 </template>
 
@@ -93,7 +97,14 @@ export default {
 
 <style scoped>
 #chart{
-  width: 80%;
+  width: 100%;
   height: 500px;
+}
+#cmm{
+
+}
+.box{
+  display: flex;
+  justify-content: space-around;
 }
 </style>

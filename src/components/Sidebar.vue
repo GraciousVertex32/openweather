@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div id="sidebar">
     <el-row class="tac">
       <el-col>
-        <h5>导航</h5>
         <el-menu router>
+          <h5>导航</h5>
           <el-submenu index="1" v-bind:disabled="disable">
 
             <template slot="title">
@@ -80,6 +80,10 @@ li{
 }
 
 el-menu{
+
+}
+#sidebar{
+  margin-right: 20px;
 
 }
 </style>

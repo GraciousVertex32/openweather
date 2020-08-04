@@ -1,20 +1,25 @@
 <template>
   <div id="simpleDay">
-    <h3>{{day}}的天气情况</h3>
-    <br>
-    <DayNightTemp v-bind:temp-info="tempInfo"></DayNightTemp>
-    <HighLights v-bind:highlights="highLightsInfo"></HighLights>
+    <div class="title">
+      <h3>{{day}}的天气情况</h3>
+    </div>
+    <div class="box">
+      <uv_chart v-bind:uv-index="uvInfo"></uv_chart>
+      <DayNightTemp v-bind:temp-info="tempInfo"></DayNightTemp>
+      <HighLights v-bind:highlights="highLightsInfo"></HighLights>
+    </div>
   </div>
 </template>
 
 <script>
 import TempVarChart from "./TempVarChart";
 import DayNightTemp from "./Temp";
-import HighLights from "./HighLights";
+import HighLights from "./forecastday/HighLights";
 import utils from "../utils/utils";
+import Uv_chart from "./forecastday/uv_chart";
 export default {
   name: "SimpleDay",
-  components: {DayNightTemp, TempVarChart, HighLights},
+  components: { Uv_chart, DayNightTemp, TempVarChart, HighLights},
   /*props:[
     'Day'
   ],*/
@@ -34,15 +39,18 @@ export default {
     highLightsInfo(){
       var obj = {
         humidity:'',
-        visibility:'',
+        uvi:'',
         type:'',
         icon:''
       }
       obj.humidity = this.weatherObj.humidity;
-      obj.visibility = this.weatherObj.uvi;
+      obj.uvi = this.weatherObj.uvi;
       obj.type = this.weatherObj.weather[0].description;
       obj.icon = this.weatherObj.weather[0].icon;
       return obj;
+    },
+    uvInfo(){
+      return this.weatherObj.uvi;
     },
     day(){
       return utils.unixToDate(this.weatherObj.dt);
@@ -52,5 +60,11 @@ export default {
 </script>
 
 <style scoped>
-
+.title{
+  margin-bottom: 50px;
+}
+.box{
+  display: flex;
+  justify-content: space-around;
+}
 </style>
