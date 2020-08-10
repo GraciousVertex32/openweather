@@ -5,7 +5,8 @@
     </div>
     <div class="box">
       <uv_chart v-bind:uv-index="uvInfo"></uv_chart>
-      <DayNightTemp v-bind:temp-info="tempInfo"></DayNightTemp>
+      <temp_chart v-bind:temp-info="tempInfo"></temp_chart>
+      <!--<DayNightTemp v-bind:temp-info="tempInfo"></DayNightTemp>-->
       <HighLights v-bind:highlights="highLightsInfo"></HighLights>
     </div>
   </div>
@@ -17,9 +18,10 @@ import DayNightTemp from "./forecastday/Temp";
 import HighLights from "./forecastday/HighLights";
 import utils from "../utils/utils";
 import Uv_chart from "./forecastday/uv_chart";
+import Temp_chart from "./forecastday/temp_chart";
 export default {
   name: "SimpleDay",
-  components: { Uv_chart, DayNightTemp, TempVarChart, HighLights},
+  components: {Temp_chart, Uv_chart, DayNightTemp, TempVarChart, HighLights},
   /*props:[
     'Day'
   ],*/
